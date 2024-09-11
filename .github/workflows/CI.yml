@@ -187,10 +187,9 @@ jobs:
         files: wheels-*/*
         fail_on_unmatched_files: true
         make_latest: true
-        # repository: tianzeshi-study/CaptionClient
+        # repository: tianzeshi-study/UUID-API
         prerelease: ${{ contains(github.ref, '-') }}
         body: "new release" 
       env:
-        token: ${{ secrets.ACCESS_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
