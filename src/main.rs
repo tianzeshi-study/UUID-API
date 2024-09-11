@@ -5,10 +5,10 @@
 use sha2::{Sha256, Digest};
 use uuid::Uuid;
 use actix_web::{web, App, HttpServer, HttpResponse, Error, HttpRequest, dev::ServiceRequest, dev::Service, dev::ServiceResponse, middleware, Responder};
-use futures::future::{ok, Either, Ready};
-use jsonwebtoken::{encode, decode, DecodingKey, EncodingKey, Header, Validation, Algorithm};
+// use futures::future::{ok, Either, Ready};
+// use jsonwebtoken::{encode, decode, DecodingKey, EncodingKey, Header, Validation, Algorithm};
 use serde::{Deserialize, Serialize};
-use std::task::{Context, Poll};
+// use std::task::{Context, Poll};
 
 // 定义结构体用于接收POST请求中的JSON数据
 #[derive(Deserialize)]
@@ -41,18 +41,6 @@ async fn hash_data(input: web::Json<InputData>) -> impl Responder {
 
 
 
-// 用于验证的密钥
-const SECRET: &[u8] = b"my_secret_key";
-
-// 创建 JWT 的示例
-fn create_jwt(user_id: &str) -> String {
-    let claims = Claims {
-        sub: user_id.to_owned(),
-        exp: 10000000000,  // 过期时间戳，通常为当前时间 + 有效期
-    };
-
-    encode(&Header::default(), &claims, &EncodingKey::from_secret(SECRET)).unwrap()
-}
 
 // 受保护的资源
 async fn protected_resource() -> HttpResponse {
